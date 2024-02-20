@@ -1,0 +1,141 @@
+%% LyX 2.3.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twoside,spanish]{elsarticle}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\pagestyle{headings}
+\usepackage{float}
+\usepackage{amssymb}
+\PassOptionsToPackage{normalem}{ulem}
+\usepackage{ulem}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algoritmo}
+\floatname{algorithm}{\protect\algorithmname}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% specify here the journal
+\journal{Curso de <<Analisis de algoritmos>>, PUJ, Bogota, Colombia - }
+
+% use this if you need line numbers
+
+\makeatother
+
+\usepackage{babel}
+\addto\shorthandsspanish{\spanishdeactivate{~<>}}
+
+\begin{document}
+
+\begin{frontmatter}{}
+
+\title{Taller 2}
+
+\tnotetext[t1]{En este documento se realiza el taller 2 de analisis de algoritmos, en el cual se nos pidio elaborar un algoritmo de dividir y vencer para hacer un juego de adivina el numero donde el usuario lo asigna y el algoritmo lo adivina.}
+
+\author[lfv]{Julian Arana}
+
+\ead{juliana-aranag@javeriana.edu.co}
+
+
+\address[lfv]{Pontificia Universidad Javeriana, Bogota, Colombia}
+\begin{abstract}
+En este algoritmo veremos el desarrollo del algoritmo que permite hacer el juego de adivina el numero donde el usuario lo asigna y el algoritmo lo adivina.
+\end{abstract}
+\begin{keyword}
+algoritmo, escritura formal, adivinar, dividir y vencer.
+\end{keyword}
+
+\end{frontmatter}{}
+
+\section{Analisis del problema}
+
+En este problema tenemos 2 actores, el software dara un numero aleatorio entre 1 y 1000. El numero que de sera el limite superior que se tendra, por ejemplo si el numero es 500 el rango del numero que el usuario puede poner es de 1 a 500.
+
+Un ejemplo de como deberia funcionar:
+
+\[
+|1|2|3|4|5|6|7|8|9|10|
+\]
+
+Numero a adivinar: 8.
+
+Dividir el algoritmo a la mitad, si el numero a adivinar es menor al de adivinar, se usara como limite inferior el numero en la mitad, si es al reves, se usa este numero como el limite superior.
+
+\[
+|5|6|7|8|9|10| \rightarrow |8|9|10| \rightarrow |8|9| \rightarrow |8|
+\]
+
+Numero encontrado.
+
+\section{Diseno del problema}
+
+El annlisis anterior nos permite disenar el problema: definir las
+entradas y salidas de un posible algoritmo de solucion, que aun no
+esta definido.
+\begin{enumerate}
+\item \emph{\uline{Entradas}}: Los limites superior [e] e inferior [b] \rightarrow [b,e], El numero a adivinar a.
+
+\item \emph{\uline{Salidas}}: Un mensaje diciendo si el numero adivinado es mayor, menor o igual al ingresado por el usuario.
+\end{enumerate}
+
+\section{Algoritmos de solucion}
+
+\subsection{Algoritmo evidente}
+
+Este algoritmo de solucion es una traduccion literal de las deficiones
+de lo que se quiere resolver.
+
+\begin{algorithm}[H]
+    \caption{Algoritmo de búsqueda binaria}
+    \begin{algorithmic}[1]
+        \Procedure{enc\_aux}{$b, e, a$}
+            \If{$b > e$}
+                \State \Return $0$
+            \Else
+                \State $q \leftarrow \text{round}((b + e) / 2)$
+                \State \textbf{print} "El número adivinado por el algoritmo es: $q$"
+                \If{$q > a$}
+                    \State \textbf{print} "El número es menor"
+                    \State \Return \textsc{enc\_aux}($b, q, a$)
+                \ElsIf{$q < a$}
+                    \State \textbf{print} "El número es mayor"
+                    \State \Return \textsc{enc\_aux}($q, e, a$)
+                \Else
+                    \State \textbf{print} "El número es correcto"
+                    \State \Return $q$
+                \EndIf
+            \EndIf
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+
+
+
+
+\begin{algorithm}[H]
+    \caption{Función para encontrar el número}
+    \begin{algorithmic}[1]
+        \Procedure{encontrar}{}
+            \State $rango \gets \text{random.randint}(1, 1000)$
+            \State \textbf{print} "El rango del numero va desde 0 a $rango$"
+            \State $numero \gets \text{int(input}("Ingrese el numero a adivinar"))$
+            \While{$numero > rango$}
+                \State $numero \gets \text{int(input}("El numero ingresado es mayor al rango dado. Seleccione otro número"))$
+            \EndWhile
+            \State \text{adivinado} $\gets \text{enc\_aux}(0, rango, numero)$
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+
+
+
+\end{document}
