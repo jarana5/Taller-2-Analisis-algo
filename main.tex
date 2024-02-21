@@ -135,7 +135,24 @@ de lo que se quiere resolver.
     \end{algorithmic}
 \end{algorithm}
 
+\section*{Analisis de Complejidad}
 
+El algoritmo implementa la estrategia de dividir y vencer para adivinar un numero en un rango dado. Supongamos que el rango dado es \(1\) a \(n\) y el numero a adivinar es \(x\).
 
+Sea \(T(n)\) la complejidad temporal del algoritmo para un rango de tamaño \(n\).
+
+\subsection*{Analisis}
+
+El algoritmo divide el rango a la mitad en cada paso y realiza una comparacion. Por lo tanto, la complejidad temporal puede expresarse de la siguiente manera:
+
+\[
+T(n) = T\left(\frac{n}{2}\right) + O(1)
+\]
+
+Donde \(O(1)\) representa el tiempo constante para realizar la comparacion y otros calculos.
+
+Podemos ver que la complejidad es \(O(\log n)\), ya que el algoritmo divide repetidamente el rango por la mitad hasta encontrar el numero deseado.
+
+La complejidad temporal del algoritmo es \(O(\log n)\).
 
 \end{document}
